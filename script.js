@@ -76,15 +76,12 @@ function displayHistory() {
         $(".leftcard").find(':first-child').remove();
     }
     if (displayStorage) {
-        var displayLength = displayStorage.length - 1
         var button = $("<button>");
         button.addClass("historybutton");
         button.addClass("m-2")
         button.addClass("ml-4")
-        button.text(displayStorage[displayLength]);
+        button.text(displayStorage[displayStorage.length - 1]);
         button.appendTo($(".leftcard"));
-        button.click({index: displayLength}, requestHistoryForecast);
-        button.click({index: displayLength}, requestHistoryMain);
     }
 }
 
