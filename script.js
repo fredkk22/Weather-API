@@ -46,16 +46,16 @@ function displayForecast(weather) {
             var forecastDays = $("<div>");
             forecastDays.addClass("card col-2 m-3")
             var dayXDate = $("<h3>");
-            dayXDate.text("(" + moment(("D" + (i + 2)), "D").format("MM/DD/YYYY") + ")");
+            dayXDate.text("(" + moment().add((i+1), "days").format("MM/DD/YYYY") + ")");
             forecastDays.append(dayXDate);
             var dayXTemp = $("<p>");
-            dayXTemp.text("Temp: " + ((weather.daily[i].temp.max + weather.daily[i].temp.min) / 2).toFixed(2) + " °F");
+            dayXTemp.text("Temp: " + ((weather.daily[i+1].temp.max + weather.daily[i+1].temp.min) / 2).toFixed(2) + " °F");
             forecastDays.append(dayXTemp);
             var dayXWind = $("<p>");
-            dayXWind.text("Wind: " + (weather.daily[i].wind_speed).toFixed(2) + " MPH");
+            dayXWind.text("Wind: " + (weather.daily[i+1].wind_speed).toFixed(2) + " MPH");
             forecastDays.append(dayXWind);
             var dayXHumid = $("<p>");
-            dayXHumid.text("Humidity: " + weather.daily[i].humidity + "%");
+            dayXHumid.text("Humidity: " + weather.daily[i+1].humidity + "%");
             forecastDays.append(dayXHumid);
             forecast.append(forecastDays);
         }
@@ -68,22 +68,21 @@ var displayUVI = function (weather) {
     mainWeather.append(cityUVI);
 }
 
-function displayHistory() {
-    var displayStorage = JSON.parse(localStorage.getItem("City Search History"));
-    
+// function displayHistory() {
+//     var displayStorage = JSON.parse(localStorage.getItem("City Search History"));
 
-    if ($(".leftcard").children().length > 4) {
-        $(".leftcard").find(':first-child').remove();
-    }
-    if (displayStorage) {
-        var button = $("<button>");
-        button.addClass("historybutton");
-        button.addClass("m-2")
-        button.addClass("ml-4")
-        button.text(displayStorage[displayStorage.length - 1]);
-        button.appendTo($(".leftcard"));
-    }
-}
+//     if (displayStorage) {
+//         var button = $("<button>");
+//         button.addClass("historybutton");
+//         button.addClass("m-2")
+//         button.addClass("ml-4")
+//         button.text(displayStorage[displayStorage.length - 1]);
+//         button.appendTo($(".leftcard"));
+//         if ($(".leftcard").children().length > 5) {
+//             $(".leftcard").find(':first-child').remove();
+//         }
+//     }
+// }
 
 function storeHistory() {
     var allCityInput = JSON.parse(localStorage.getItem("City Search History"));
@@ -207,7 +206,7 @@ var searchBtnHandler = function (event) {
         requestMain();
         requestForecast();
         storeHistory();
-        displayHistory();
+        displayAllHistory();
         cityInput.val('');
     }
 };
@@ -216,6 +215,7 @@ function displayAllHistory() {
     var displayStorage = JSON.parse(localStorage.getItem("City Search History"));
 
     if (displayStorage) {
+        $(".leftcard").empty();
         for (i = 0; i < displayStorage.length; i++) {
             var button = $("<button>");
             button.addClass("historybutton");
