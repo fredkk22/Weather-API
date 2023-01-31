@@ -30,11 +30,12 @@ function displayMain(weather) {
         const cityWind = weather.wind.speed;
         const cityHumidity = weather.main.humidity;
         const iconUrl = `http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`;
+        const iconDescription = weather.weather[0].description || weather.weather[0].main;
 
         cityNameEl.text(`${cityName} (${moment().format("MM/DD/YYYY")})`);
         mainWeather.append(cityNameEl);
         iconEl.attr("src", iconUrl)
-        iconEl.attr("alt", "Weather Icon");
+        iconEl.attr("alt", iconDescription);
         cityNameEl.append(iconEl);
         cityTempEl.text(`Temp: ${cityTemp.toFixed(2)} °F`);
         mainWeather.append(cityTempEl);
