@@ -15,10 +15,10 @@ const forecast = $(".forecast");
 
 
 function displayHeaders() {
-    cityLabel.text("Search for a City:");
-    title.text("City Weather Dashboard");
+    cityLabel.text("Enter your location:");
+    title.text("What's Your Weather?");
     description1.text("Displays present weather and 5-day forecast");
-    description2.text("ONLY ACCEPTS CITY/TOWN NAMES: Los Angeles ✅ | Los Angeles, CA ❌")
+    description2.text("ONLY ACCEPTS SINGLE ENTRIES & NO ABBREVIATIONS: Los Angeles ✅ | Los Angeles, CA ❌ | LA ❌")
     searchBtn.text("Search");
 }
 
