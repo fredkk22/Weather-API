@@ -34,7 +34,7 @@ function displayMain(weather) {
         const cityTemp = weather.main.temp;
         const cityWind = weather.wind.speed;
         const cityHumidity = weather.main.humidity;
-        const iconUrl = `http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`;
+        const iconUrl = `https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`;
         const iconDescription = weather.weather[0].description || weather.weather[0].main;
 
         cityNameEl.text(`${cityName} (${moment().format("MM/DD/YYYY")})`);
