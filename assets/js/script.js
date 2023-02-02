@@ -11,6 +11,7 @@ const day4 = $("#day4");
 const day5 = $("#day5");
 const forecast = $(".forecast");
 
+
 function displayHeaders() {
     cityLabel.text("Search for a City:");
     title.text("Weather Dashboard");
@@ -76,7 +77,7 @@ const displayUVI = function (weather) {
 }
 
 function storeHistory() {
-    const allCityInput = JSON.parse(localStorage.getItem("City Search History"));
+    let allCityInput = JSON.parse(localStorage.getItem("City Search History"));
     const cityInputVal = cityInput.val();
 
     if (cityInputVal) {
@@ -95,7 +96,6 @@ const requestMain = function () {
     const url = "http://api.openweathermap.org/data/2.5/weather?q=" + cityInputVal + "&appid=c3724c60a3fb224ac5bc841e274c0689&units=imperial";
 
     fetch(url).then(res => res.json()).then(function (data) {
-        console.log(data);
         displayMain(data);
         fetch("http://api.openweathermap.org/data/2.5/onecall?lat=" + data.coord.lat + "&lon=" + data.coord.lon + "&exclude=minutely,hourly,alerts&appid=c3724c60a3fb224ac5bc841e274c0689&units=imperial")
             .then(res => (res.json())).then(data => displayUVI(data));
