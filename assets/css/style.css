@@ -6,3 +6,19 @@ form {
     border-bottom: 0.15rem solid black;
     padding-bottom: 1rem;
 }
+
+h2 {
+    font-size: medium;
+}
+
+h3 {
+    font-size: small;
+}
+
+h4 {
+    font-size: 30px;
+}
+
+h5 {
+    font-size: 20px;
+}

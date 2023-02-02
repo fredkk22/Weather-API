@@ -1,4 +1,6 @@
 const title = $("h1");
+const description1 = $("h2");
+const description2 = $("h3");
 const cityLabel = $(".citylabel");
 const searchBtn = $(".searchbtn");
 const userForm = $("#userform");
@@ -14,14 +16,16 @@ const forecast = $(".forecast");
 
 function displayHeaders() {
     cityLabel.text("Search for a City:");
-    title.text("Weather Dashboard");
+    title.text("City Weather Dashboard");
+    description1.text("Displays present weather and 5-day forecast");
+    description2.text("ONLY ACCEPTS CITY/TOWN NAMES: Los Angeles ✅ | Los Angeles, CA ❌")
     searchBtn.text("Search");
 }
 
 function displayMain(weather) {
 
     if (mainWeather.text("")) {
-        const cityNameEl = $("<h2>");
+        const cityNameEl = $("<h4>");
         const cityTempEl = $("<p>");
         const cityWindEl = $("<p>");
         const cityHumidityEl = $("<p>");
@@ -48,22 +52,23 @@ function displayMain(weather) {
 }
 
 function displayForecast(weather) {
+    
 
     if (forecast.text("")) {
         for (i = 0; i < 5; i++) {
             const forecastDays = $("<div>");
             forecastDays.addClass("card col-2 m-3")
-            const dayXDate = $("<h3>");
-            dayXDate.text("(" + moment().add((i + 1), "days").format("MM/DD/YYYY") + ")");
+            const dayXDate = $("<h5>");
+            dayXDate.text(`(${moment().add((i + 1), "days").format("MM/DD/YYYY")})`);
             forecastDays.append(dayXDate);
             const dayXTemp = $("<p>");
-            dayXTemp.text("Temp: " + ((weather.daily[i + 1].temp.max + weather.daily[i + 1].temp.min) / 2).toFixed(2) + " °F");
+            dayXTemp.text(`Temp: ${((weather.daily[i + 1].temp.max + weather.daily[i + 1].temp.min) / 2).toFixed(2)} °F`);
             forecastDays.append(dayXTemp);
             const dayXWind = $("<p>");
-            dayXWind.text("Wind: " + (weather.daily[i + 1].wind_speed).toFixed(2) + " MPH");
+            dayXWind.text(`Wind: ${(weather.daily[i + 1].wind_speed).toFixed(2)} MPH`);
             forecastDays.append(dayXWind);
             const dayXHumid = $("<p>");
-            dayXHumid.text("Humidity: " + weather.daily[i + 1].humidity + "%");
+            dayXHumid.text(`Humidity: ${weather.daily[i + 1].humidity}%`);
             forecastDays.append(dayXHumid);
             forecast.append(forecastDays);
         }
