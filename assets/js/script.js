@@ -12,6 +12,7 @@ const day3 = $("#day3");
 const day4 = $("#day4");
 const day5 = $("#day5");
 const forecast = $(".forecast");
+require('dotenv').config();
 
 
 function displayHeaders() {
@@ -98,42 +99,42 @@ function storeHistory() {
 
 const requestMain = function () {
     const cityInputVal = cityInput.val();
-    const url = "https://api.openweathermap.org/data/2.5/weather?q=" + cityInputVal + "&appid=c3724c60a3fb224ac5bc841e274c0689&units=imperial";
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityInputVal}&appid=${process.env.API_KEY}&units=imperial`;
 
     fetch(url).then(res => res.json()).then(function (data) {
         displayMain(data);
-        fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + data.coord.lat + "&lon=" + data.coord.lon + "&exclude=minutely,hourly,alerts&appid=c3724c60a3fb224ac5bc841e274c0689&units=imperial")
+        fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude=minutely,hourly,alerts&appid=${process.env.API_KEY}&units=imperial`)
             .then(res => (res.json())).then(data => displayUVI(data));
     });
 }
 
 const requestHistoryMain = function (event) {
     const displayStorage = JSON.parse(localStorage.getItem("City Search History"));
-    const url = "https://api.openweathermap.org/data/2.5/weather?q=" + displayStorage[event.data.index] + "&appid=c3724c60a3fb224ac5bc841e274c0689&units=imperial";
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${displayStorage[event.data.index]}&appid=${process.env.API_KEY}&units=imperial`;
 
     fetch(url).then(res => res.json()).then(function (data) {
         displayMain(data);
-        fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + data.coord.lat + "&lon=" + data.coord.lon + "&exclude=minutely,hourly,alerts&appid=c3724c60a3fb224ac5bc841e274c0689&units=imperial")
+        fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude=minutely,hourly,alerts&appid=${process.env.API_KEY}&units=imperial`)
             .then(res => res.json()).then(data => displayUVI(data))
     });
 };
 
 const requestForecast = function () {
     const cityInputVal = cityInput.val();
-    const forecastUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityInputVal + "&appid=c3724c60a3fb224ac5bc841e274c0689&units=imperial";
+    const forecastUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInputVal}&appid=&units=imperial`;
 
     fetch(forecastUrl).then((res) => res.json()).then(function (data) {
-        fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + data.coord.lat + "&lon=" + data.coord.lon + "&exclude=minutely,hourly,alerts&appid=c3724c60a3fb224ac5bc841e274c0689&units=imperial")
+        fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude=minutely,hourly,alerts&appid=${process.env.API_KEY}&units=imperial`)
             .then((res) => res.json()).then(data => displayForecast(data))
     })
 }
 
 const requestHistoryForecast = function (event) {
     const displayStorage = JSON.parse(localStorage.getItem("City Search History"));
-    const forecastUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + displayStorage[event.data.index] + "&appid=c3724c60a3fb224ac5bc841e274c0689&units=imperial";
+    const forecastUrl = `https://api.openweathermap.org/data/2.5/weather?q=${displayStorage[event.data.index]}&appid=${process.env.API_KEY}&units=imperial`;
 
     fetch(forecastUrl).then(res => res.json()).then(function (data) {
-        fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + data.coord.lat + "&lon=" + data.coord.lon + "&exclude=minutely,hourly,alerts&appid=c3724c60a3fb224ac5bc841e274c0689&units=imperial")
+        fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude=minutely,hourly,alerts&appid=${process.env.API_KEY}&units=imperial`)
             .then(res => res.json()).then(data => displayForecast(data))
     })
 }
