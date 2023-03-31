@@ -6,14 +6,7 @@ const searchBtn = $(".searchbtn");
 const userForm = $("#userform");
 const cityInput = $(".cityinput");
 const mainWeather = $(".mainweather");
-const day1 = $("#day1");
-const day2 = $("#day2");
-const day3 = $("#day3");
-const day4 = $("#day4");
-const day5 = $("#day5");
 const forecast = $(".forecast");
-require('dotenv').config();
-
 
 function displayHeaders() {
     cityLabel.text("Enter your location:");
@@ -53,7 +46,7 @@ function displayMain(weather) {
 }
 
 function displayForecast(weather) {
-
+    
 
     if (forecast.text("")) {
         for (i = 0; i < 5; i++) {
