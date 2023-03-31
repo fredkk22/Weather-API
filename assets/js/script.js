@@ -53,7 +53,7 @@ function displayMain(weather) {
 }
 
 function displayForecast(weather) {
-    
+
 
     if (forecast.text("")) {
         for (i = 0; i < 5; i++) {
@@ -121,7 +121,7 @@ const requestHistoryMain = function (event) {
 
 const requestForecast = function () {
     const cityInputVal = cityInput.val();
-    const forecastUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInputVal}&appid=&units=imperial`;
+    const forecastUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInputVal}&appid=${process.env.API_KEY}&units=imperial`;
 
     fetch(forecastUrl).then((res) => res.json()).then(function (data) {
         fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude=minutely,hourly,alerts&appid=${process.env.API_KEY}&units=imperial`)
